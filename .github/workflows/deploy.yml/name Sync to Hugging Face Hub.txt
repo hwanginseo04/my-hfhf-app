@@ -18,7 +18,7 @@ jobs:
       - name: Install huggingface_hub
         run: pip install huggingface_hub
 
-      - name: Create Space and Push to Hugging Face Hub
+      - name: Push to Hugging Face Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
@@ -29,22 +29,9 @@ jobs:
           token = os.environ.get('HF_TOKEN')
           api = HfApi(token=token)
           
-          repo_id = 'inseo37099/my-hfhf-app'
-          
-          try:
-              api.create_repo(
-                  repo_id=repo_id,
-                  repo_type='space',
-                  space_sdk='static',
-                  private=False
-              )
-              print(f'Space {repo_id} created successfully!')
-          except Exception as e:
-              print(f'Repo might already exist or error occurred: {e}')
-
           api.upload_folder(
               folder_path='.',
-              repo_id=repo_id,
+              repo_id='inseo37099/my-hfhf-app',
               repo_type='space',
           )
           print('Successfully uploaded code to Hugging Face Space!')
