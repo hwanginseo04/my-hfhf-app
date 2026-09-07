@@ -1,4 +1,5 @@
 name: Sync to Hugging Face Hub
+
 on:
   push:
     branches: [main]
@@ -10,9 +11,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          lfs: true
       - name: Push to Hugging Face Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git push --force https://hwanginseo04:$HF_TOKEN@huggingface.co/spaces/hwanginseo04/my-hfhf-app main
+          git push --force https://inseo3709:$HF_TOKEN@huggingface.co/spaces/inseo3709/my-hfhf-app main
           
