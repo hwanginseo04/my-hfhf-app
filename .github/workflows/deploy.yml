@@ -12,9 +12,11 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - name: Push to Hugging Face Hub
+      - name: Create Space and Push to Hugging Face Hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          pip install huggingface_hub
+          python -c "from huggingface_hub import HfApi; HfApi().create_repo(repo_id='inseo3709/my-hfhf-app', repo_type='space', space_sdk='gradio', exist_ok=True, token='$HF_TOKEN')"
           git push --force https://inseo3709:$HF_TOKEN@huggingface.co/spaces/inseo3709/my-hfhf-app main
           
